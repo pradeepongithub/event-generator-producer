@@ -1,0 +1,40 @@
+
+kafkabootstrapservers: localhost:9092
+eventProcessorTopic: cardSwipe.v1
+server:
+  port: 8081
+
+kafka:
+  clientId: event-generator-producer
+  bootstrap-servers: ${kafkabootstrapservers}
+  topic: ${eventProcessorTopic}
+  login-module: org.apache.kafka.common.security.plain.PlainLoginModule
+  security-protocol: SASL_SSL
+  sasl-mechanism: PLAIN
+
+spring:
+  sleuth:
+    propagationKeys:
+      - x-adf-trace-id
+    log:
+      slf4j:
+        whitelisted-mdc-keys:
+          - x-adf-trace-id
+  application:
+    name: EventProducer
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    distribution:
+      percentiles[http.server.requests]: 0.90,0.95,0.99
+  info:
+    git:
+      mode: full
+
