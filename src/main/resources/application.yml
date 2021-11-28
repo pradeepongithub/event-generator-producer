@@ -1,8 +1,8 @@
 
-kafkabootstrapservers: localhost:9092
+kafkabootstrapservers: broker:9092
 eventProcessorTopic: cardSwipe.v1
 server:
-  port: 8081
+  port: 8080
 
 kafka:
   clientId: event-generator-producer

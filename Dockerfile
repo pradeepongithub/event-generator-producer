@@ -1,4 +1,3 @@
 FROM openjdk:8-alpine
-ARG JAR_FILE
-ADD target/${JAR_FILE} app.jar
+ADD target/producer-0.0.1.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
